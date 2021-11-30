@@ -8,4 +8,7 @@
     <string name="forgot_password">Forgot Password ?</string>
     <string name="or_with">or with</string>
     <string name="do_not_have_account">Don’t have an account?</string>
+    <string name="have_any_account">Have any account?</string>
+    <string name="sign_in">Sign In</string>
+    <string name="username">Username</string>
 </resources>

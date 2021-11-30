@@ -27,15 +27,15 @@ class MainActivity : ComponentActivity() {
 
 @androidx.compose.runtime.Composable
 fun Navigation(navController: NavHostController) {
-    NavHost(navController = navController, startDestination = Screen.Login.route) {
+    NavHost(navController = navController, startDestination = Screen.Signup.route) {
         composable(Screen.Login.route) {
-            LoginScreen()
+            LoginScreen(navController)
         }
         composable(Screen.Splash.route) {
             SplashScreen(navController)
         }
         composable(Screen.Signup.route) {
-            SignupScreen()
+            SignupScreen(navController)
         }
     }
 }

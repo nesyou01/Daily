@@ -10,13 +10,16 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavController
 import com.nesyou.daily.R
+import com.nesyou.daily.core.domain.utils.Helpers.navigateReplacement
+import com.nesyou.daily.core.domain.utils.Screen
 import com.nesyou.daily.features.auth.ui.components.AuthLayout
 import com.nesyou.daily.features.auth.ui.components.SocialWithButton
 import com.nesyou.daily.features.auth.ui.components.UnderlinedInput
 
 @Composable
-fun LoginScreen() {
+fun LoginScreen(navController: NavController) {
     AuthLayout {
         Text(
             stringResource(id = R.string.login),
@@ -57,7 +60,11 @@ fun LoginScreen() {
             modifier = Modifier.align(Alignment.CenterHorizontally)
         ) {
             Text(stringResource(R.string.do_not_have_account))
-            TextButton(onClick = { /*TODO*/ }) {
+            TextButton(
+                onClick = {
+                    navController.navigateReplacement(Screen.Signup.route)
+                },
+            ) {
                 Text(
                     stringResource(R.string.sign_up),
                     style = MaterialTheme.typography.h4,

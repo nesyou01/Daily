@@ -2,8 +2,6 @@ package com.nesyou.daily.features.auth.ui.splash
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.rememberScrollState
-import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -12,22 +10,17 @@ import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
+import androidx.navigation.NavController
 import com.nesyou.daily.R
+import com.nesyou.daily.core.domain.utils.Screen
 import com.nesyou.daily.core.ui.components.ExpandedButton
 import com.nesyou.daily.core.ui.components.PrimaryTextButton
+import com.nesyou.daily.features.auth.ui.components.AuthLayout
 
 @Composable
-fun SplashScreen() {
-    Column(
-        modifier = Modifier
-            .fillMaxSize()
-            .verticalScroll(rememberScrollState())
-            .padding(
-                horizontal = dimensionResource(id = R.dimen.horizontal_padding),
-                vertical = dimensionResource(id = R.dimen.medium)
-            ),
-        verticalArrangement = Arrangement.SpaceEvenly,
-        horizontalAlignment = Alignment.CenterHorizontally
+fun SplashScreen(navController: NavController) {
+    AuthLayout(
+        alignment = Alignment.CenterHorizontally
     ) {
         Image(
             painter = painterResource(id = R.drawable.splash),
@@ -54,11 +47,15 @@ fun SplashScreen() {
         ) {
             ExpandedButton(
                 text = stringResource(R.string.login),
-                onClick = {}
+                onClick = {
+                    navController.navigate(Screen.Login.route)
+                }
             )
             PrimaryTextButton(
                 text = stringResource(R.string.sign_up),
-                onClick = { /*TODO*/ },
+                onClick = {
+                    navController.navigate(Screen.Signup.route)
+                },
             )
         }
     }

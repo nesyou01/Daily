@@ -9,6 +9,8 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.nesyou.daily.core.domain.utils.Screen
 import com.nesyou.daily.core.ui.theme.DailyTheme
+import com.nesyou.daily.features.auth.ui.login.LoginScreen
+import com.nesyou.daily.features.auth.ui.signup.SignupScreen
 import com.nesyou.daily.features.auth.ui.splash.SplashScreen
 
 class MainActivity : ComponentActivity() {
@@ -25,12 +27,15 @@ class MainActivity : ComponentActivity() {
 
 @androidx.compose.runtime.Composable
 fun Navigation(navController: NavHostController) {
-    NavHost(navController = navController, startDestination = Screen.Splash.route) {
+    NavHost(navController = navController, startDestination = Screen.Login.route) {
         composable(Screen.Login.route) {
-
+            LoginScreen()
         }
         composable(Screen.Splash.route) {
-            SplashScreen()
+            SplashScreen(navController)
+        }
+        composable(Screen.Signup.route) {
+            SignupScreen()
         }
     }
 }

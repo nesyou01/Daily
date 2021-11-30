@@ -12,6 +12,7 @@
         <activity
             android:name=".core.ui.MainActivity"
             android:exported="true"
+            android:windowSoftInputMode="adjustResize"
             android:label="@string/app_name"
             android:theme="@style/Theme.Daily.NoActionBar">
             <intent-filter>

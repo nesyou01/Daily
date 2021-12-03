@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "223109760132",
+    "project_id": "daily-ed45f",
+    "storage_bucket": "daily-ed45f.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:223109760132:android:8d232cca533c34e77a2ed1",
+        "android_client_info": {
+          "package_name": "com.nesyou.daily"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "223109760132-kkpv0bdqq7bs255cucl26li063urt4d5.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBU7jXT-ei_TBJHyYvoke15xugEFNyXGNY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "223109760132-kkpv0bdqq7bs255cucl26li063urt4d5.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

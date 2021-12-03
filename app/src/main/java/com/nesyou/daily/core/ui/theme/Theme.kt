@@ -10,7 +10,8 @@ private val LightColorPalette = lightColors(
     onBackground = DarkPurple,
     secondary = LightGray,
     onSecondary = DarkGray,
-    secondaryVariant = Gray
+    secondaryVariant = Gray,
+    error = Red
 )
 
 @Composable

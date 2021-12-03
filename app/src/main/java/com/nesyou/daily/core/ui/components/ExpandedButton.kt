@@ -14,13 +14,15 @@ import com.nesyou.daily.R
 @Composable
 fun ExpandedButton(
     onClick: () -> Unit,
-    text: String
+    text: String,
+    modifier: Modifier = Modifier
 ) {
     Button(
         onClick = onClick,
         modifier = Modifier
             .sizeIn(maxWidth = dimensionResource(id = R.dimen.max_width))
-            .fillMaxWidth(),
+            .fillMaxWidth()
+            .then(modifier),
         contentPadding = PaddingValues(vertical = dimensionResource(id = R.dimen.medium)),
         shape = MaterialTheme.shapes.medium
     ) {

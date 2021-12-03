@@ -10,5 +10,9 @@
     <string name="do_not_have_account">Don’t have an account?</string>
     <string name="have_any_account">Have any account?</string>
     <string name="sign_in">Sign In</string>
-    <string name="username">Username</string>
+    <string name="full_name">Full Name</string>
+    <string name="unexpected_error">Unexpected error</string>
+    <string name="facebook_app_id">962515557954983</string>
+    <string name="fb_login_protocol_scheme">cdd86263facef49031acd724f1ba88cd</string>
+    <string name="google_client_id">223109760132-ei7at976p5kskfmu40ch0uh1odnd32h0.apps.googleusercontent.com</string>
 </resources>

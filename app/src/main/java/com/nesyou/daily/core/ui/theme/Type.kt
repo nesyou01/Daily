@@ -40,4 +40,9 @@ val Typography = Typography(
         fontWeight = FontWeight.Normal,
         fontSize = 15.sp,
     ),
+    h3 = TextStyle(
+        fontSize = 20.sp,
+        fontWeight = FontWeight.Medium,
+        color = DarkPurple
+    )
 )

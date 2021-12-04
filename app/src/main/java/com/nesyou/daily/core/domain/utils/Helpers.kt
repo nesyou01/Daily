@@ -11,4 +11,7 @@ object Helpers {
     }
 
     fun currentTimeStamp(): Timestamp = Timestamp(System.currentTimeMillis())
+
+    fun String.capitalizeWord(): String = this.lowercase().replaceFirstChar { char -> char.titlecase() }
+
 }

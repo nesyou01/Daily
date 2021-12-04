@@ -15,4 +15,8 @@
     <string name="facebook_app_id">962515557954983</string>
     <string name="fb_login_protocol_scheme">cdd86263facef49031acd724f1ba88cd</string>
     <string name="google_client_id">223109760132-ei7at976p5kskfmu40ch0uh1odnd32h0.apps.googleusercontent.com</string>
+    <string name="let_is_make_this_day">Let’s make this day productive</string>
+    <string name="hi_with_comma">Hi, %1$s</string>
+    <string name="my_tasks">My Tasks</string>
+    <string name="today_tasks">Today Tasks</string>
 </resources>

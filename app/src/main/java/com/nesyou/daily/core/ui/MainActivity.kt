@@ -3,10 +3,10 @@ package com.nesyou.daily.core.ui
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.compose.animation.AnimatedVisibility
-import androidx.compose.animation.ExperimentalAnimationApi
-import androidx.compose.animation.fadeIn
-import androidx.compose.animation.fadeOut
+import androidx.compose.animation.*
+import androidx.compose.animation.core.LinearEasing
+import androidx.compose.animation.core.tween
+import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
@@ -42,6 +42,7 @@ import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 @ExperimentalAnimationApi
+@ExperimentalFoundationApi
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -51,7 +52,7 @@ class MainActivity : ComponentActivity() {
                 Scaffold(
                     bottomBar = {
                         BottomBar(navController = navController)
-                    }
+                    },
                 ) { innerPadding ->
                     Box(modifier = Modifier.padding(innerPadding)) {
                         Navigation(navController = navController)
@@ -59,19 +60,19 @@ class MainActivity : ComponentActivity() {
                 }
 
             }
-
         }
     }
 }
 
 
+@ExperimentalFoundationApi
 @ExperimentalAnimationApi
 @Composable
 private fun Navigation(navController: NavHostController) {
     val initRoute = if (Firebase.auth.currentUser == null) {
         Screen.Splash.route
     } else {
-        Screen.Home.route
+        Screen.Tasks.route
     }
     NavHost(navController = navController, startDestination = initRoute) {
         composable(Screen.Login.route) {
@@ -112,11 +113,6 @@ private fun BottomBar(navController: NavController) {
             activeIcon = R.drawable.ic_document_filled
         ),
         BottomBarItem(
-            route = Screen.Login.route,
-            icon = R.drawable.ic_add,
-            replaced = true
-        ),
-        BottomBarItem(
             route = Screen.Graphic.route,
             icon = R.drawable.ic_activity,
             activeIcon = R.drawable.ic_activity_filled
@@ -130,53 +126,62 @@ private fun BottomBar(navController: NavController) {
 
     val currentRoute =
         navController.currentBackStackEntryAsState().value?.destination?.route
-    if (currentRoute in bottomBarItems.filter { !it.replaced }
-            .map { it.route }) {
-        Surface(
-            color = MaterialTheme.colors.background
+    if (currentRoute in bottomBarItems.map { it.route }) {
+        BottomNavigation(
+            backgroundColor = MaterialTheme.colors.background,
+            modifier = Modifier.height(65.dp),
+            elevation = 5.dp
         ) {
-            Row(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(vertical = 10.dp),
-                horizontalArrangement = Arrangement.SpaceEvenly
-            ) {
-                bottomBarItems.map {
-                    val active = currentRoute == it.route
-                    IconButton(
-                        onClick = {
-                            navController.navigate(it.route) {
-                                launchSingleTop = true
-                            }
-                        },
-                        modifier = if (it.replaced) Modifier
-                            .clip(CircleShape)
-                            .background(MaterialTheme.colors.primary) else Modifier.weight(
-                            1F
-                        ),
-                        enabled = !active
-                    ) {
-                        Image(
-                            painter = painterResource(id = if (!active || it.activeIcon == null) it.icon else it.activeIcon),
-                            contentDescription = null,
-                        )
-                        AnimatedVisibility(visible = active, enter = fadeIn(), exit = fadeOut()) {
-                            Box(
-                                contentAlignment = Alignment.BottomCenter,
-                                modifier = Modifier
-                                    .fillMaxSize()
-                                    .padding(bottom = 4.dp)
-                            ) {
+            bottomBarItems.mapIndexed { i, item ->
+                val active = currentRoute == item.route
+                BottomNavigationItem(
+                    selected = active,
+                    onClick = {
+                        navController.navigate(item.route) {
+                            launchSingleTop = true
+                        }
+                    },
+                    icon = {
+                        Box(
+                            modifier = Modifier
+                                .fillMaxSize()
+                                .padding(bottom = if (active) 15.dp else 0.dp)
+                                .animateContentSize(
+                                    animationSpec = tween(
+                                        200,
+                                        easing = LinearEasing
+                                    )
+                                ),
+                            contentAlignment = Alignment.Center
+                        ) {
+                            Image(
+                                painter = painterResource(id = if (!active) item.icon else item.activeIcon),
+                                contentDescription = null,
+                            )
+                            if (active)
                                 Box(
                                     modifier = Modifier
                                         .size(5.dp)
                                         .clip(CircleShape)
-                                        .background(MaterialTheme.colors.primary),
+                                        .background(MaterialTheme.colors.primary)
+                                        .align(Alignment.BottomCenter),
                                 )
-                            }
                         }
+                    },
+                )
+                if (i + 1 == bottomBarItems.size / 2) {
+                    FloatingActionButton(
+                        onClick = { /*TODO*/ },
+                        shape = CircleShape,
+                        backgroundColor = MaterialTheme.colors.primary,
+                        elevation = FloatingActionButtonDefaults.elevation(0.dp, 0.dp),
+                        modifier = Modifier.padding(horizontal = 10.dp).align(Alignment.CenterVertically),
+                    ) {
+                        Icon(
+                            painter = painterResource(id = R.drawable.ic_add),
+                            contentDescription = ""
+                        )
                     }
-
                 }
             }
         }

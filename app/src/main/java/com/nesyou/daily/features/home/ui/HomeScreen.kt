@@ -1,13 +1,14 @@
 package com.nesyou.daily.features.home.ui
 
 import androidx.compose.foundation.*
+import androidx.compose.foundation.gestures.LocalOverScrollConfiguration
 import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.lazy.*
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
 import androidx.compose.material.Text
 import androidx.compose.material.TextButton
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -25,88 +26,93 @@ import com.nesyou.daily.core.ui.components.TaskCard
 import com.nesyou.daily.features.home.ui.components.StaggeredItem
 import com.skydoves.landscapist.glide.GlideImage
 
+@ExperimentalFoundationApi
 @Composable
 fun HomeScreen() {
     val user = Firebase.auth.currentUser!!
-    Column(
-        modifier = Modifier
-            .verticalScroll(rememberScrollState())
-            .padding(
-                horizontal = dimensionResource(id = R.dimen.horizontal_padding),
-                vertical = 15.dp
-            ),
-        verticalArrangement = Arrangement.spacedBy(25.dp)
+    CompositionLocalProvider(
+        LocalOverScrollConfiguration provides null
     ) {
-        Row(
+        Column(
             modifier = Modifier
-                .fillMaxWidth()
-                .padding(bottom = 10.dp),
-            horizontalArrangement = Arrangement.SpaceBetween,
-            verticalAlignment = Alignment.CenterVertically
-        ) {
-            Column {
-                Text(
-                    stringResource(
-                        R.string.hi_with_comma,
-                        user.displayName!!.let {
-                            it.substring(0, it.indexOf(" "))
-                        }.capitalizeWord(),
-                    ),
-                    style = MaterialTheme.typography.h2.copy(fontSize = 27.sp),
-                    color = MaterialTheme.colors.primaryVariant
-                )
-                Text(
-                    stringResource(R.string.let_is_make_this_day),
-                    style = MaterialTheme.typography.h6
-                )
-            }
-            Surface(
-                elevation = 5.dp,
-                shape = MaterialTheme.shapes.medium,
-            ) {
-                GlideImage(
-                    imageModel = user.photoUrl ?: R.drawable.profile,
-                    modifier = Modifier
-                        .size(42.dp)
-                        .clip(MaterialTheme.shapes.medium),
-                    contentScale = ContentScale.Crop,
-                )
-            }
-        }
-        Column(
-            verticalArrangement = Arrangement.spacedBy(10.dp)
-        ) {
-            Text(
-                stringResource(R.string.my_tasks),
-                style = MaterialTheme.typography.h2,
-                color = MaterialTheme.colors.primaryVariant
-            )
-            TasksGrid()
-        }
-        Column(
-            verticalArrangement = Arrangement.spacedBy(10.dp)
+                .verticalScroll(rememberScrollState())
+                .padding(
+                    horizontal = dimensionResource(id = R.dimen.horizontal_padding),
+                    vertical = 15.dp
+                ),
+            verticalArrangement = Arrangement.spacedBy(25.dp)
         ) {
             Row(
-                modifier = Modifier.fillMaxWidth(),
-                horizontalArrangement = Arrangement.SpaceBetween
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(bottom = 10.dp),
+                horizontalArrangement = Arrangement.SpaceBetween,
+                verticalAlignment = Alignment.CenterVertically
+            ) {
+                Column {
+                    Text(
+                        stringResource(
+                            R.string.hi_with_comma,
+                            user.displayName!!.let {
+                                it.substring(0, it.indexOf(" "))
+                            }.capitalizeWord(),
+                        ),
+                        style = MaterialTheme.typography.h2.copy(fontSize = 27.sp),
+                        color = MaterialTheme.colors.primaryVariant
+                    )
+                    Text(
+                        stringResource(R.string.let_is_make_this_day),
+                        style = MaterialTheme.typography.h6
+                    )
+                }
+                Surface(
+                    elevation = 5.dp,
+                    shape = MaterialTheme.shapes.medium,
+                ) {
+                    GlideImage(
+                        imageModel = user.photoUrl ?: R.drawable.profile,
+                        modifier = Modifier
+                            .size(42.dp)
+                            .clip(MaterialTheme.shapes.medium),
+                        contentScale = ContentScale.Crop,
+                    )
+                }
+            }
+            Column(
+                verticalArrangement = Arrangement.spacedBy(10.dp)
             ) {
                 Text(
-                    stringResource(R.string.today_tasks),
+                    stringResource(R.string.my_tasks),
                     style = MaterialTheme.typography.h2,
                     color = MaterialTheme.colors.primaryVariant
                 )
-                TextButton(onClick = { /*TODO*/ }) {
-                    Text("View all")
+                TasksGrid()
+            }
+            Column(
+                verticalArrangement = Arrangement.spacedBy(10.dp)
+            ) {
+                Row(
+                    modifier = Modifier.fillMaxWidth(),
+                    horizontalArrangement = Arrangement.SpaceBetween
+                ) {
+                    Text(
+                        stringResource(R.string.today_tasks),
+                        style = MaterialTheme.typography.h2,
+                        color = MaterialTheme.colors.primaryVariant
+                    )
+                    TextButton(onClick = { /*TODO*/ }) {
+                        Text("View all")
+                    }
+                }
+                Column {
+                    repeat(6) {
+                        TaskCard(
+                            modifier = Modifier.padding(bottom = 10.dp),
+                            onClick = {}
+                        )
+                    }
                 }
             }
-           Column {
-               repeat(6){
-                   TaskCard(
-                       modifier = Modifier.padding(bottom = 10.dp),
-                       onClick = {}
-                   )
-               }
-           }
         }
     }
 

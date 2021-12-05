@@ -4,7 +4,6 @@ import androidx.annotation.DrawableRes
 
 data class BottomBarItem(
     @DrawableRes val icon: Int,
-    @DrawableRes val activeIcon: Int? = null,
+    @DrawableRes val activeIcon: Int,
     val route: String,
-    val replaced: Boolean = false
 )

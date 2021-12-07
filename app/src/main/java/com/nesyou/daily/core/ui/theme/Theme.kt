@@ -14,7 +14,7 @@ private val LightColorPalette = lightColors(
     error = Red,
     primaryVariant = DarkerPurple,
     surface = BackGray,
-    onSurface = OnBackGray
+    onSurface = OnBackGray,
 )
 
 @Composable

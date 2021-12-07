@@ -11,7 +11,8 @@ import com.nesyou.daily.R
 private val HindSiliguriFontFamily = FontFamily(
     Font(R.font.hindsiliguri_medium, FontWeight.Medium),
     Font(R.font.hindsiliguri_regular, FontWeight.Normal),
-    Font(R.font.hindsiliguri_semibold, FontWeight.SemiBold)
+    Font(R.font.hindsiliguri_semibold, FontWeight.SemiBold),
+    Font(R.font.hindsiliguri_bold, FontWeight.Bold),
 )
 val Typography = Typography(
     defaultFontFamily = HindSiliguriFontFamily,
@@ -34,7 +35,7 @@ val Typography = Typography(
     ),
     h2 = TextStyle(
         fontWeight = FontWeight.SemiBold,
-        fontSize = 23.sp,
+        fontSize = 24.sp,
     ),
     h5 = TextStyle(
         fontWeight = FontWeight.Normal,
@@ -43,6 +44,5 @@ val Typography = Typography(
     h3 = TextStyle(
         fontSize = 20.sp,
         fontWeight = FontWeight.Medium,
-        color = DarkPurple
     )
 )

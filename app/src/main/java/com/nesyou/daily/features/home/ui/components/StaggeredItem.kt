@@ -15,7 +15,6 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.nesyou.daily.R
@@ -56,7 +55,11 @@ fun ColumnScope.StaggeredItem(
                 verticalArrangement = Arrangement.SpaceBetween,
                 modifier = Modifier.fillMaxHeight()
             ) {
-                Image(painter = painterResource(id = icon), contentDescription = null)
+                Image(
+                    painter = painterResource(id = icon),
+                    contentDescription = null,
+                    modifier = Modifier.sizeIn(maxHeight = 90.dp)
+                )
                 Text(title, color = mainColor, style = MaterialTheme.typography.h3)
                 Text(
                     "$length Task",

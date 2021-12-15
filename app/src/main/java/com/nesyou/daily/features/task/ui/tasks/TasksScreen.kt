@@ -1,4 +1,4 @@
-package com.nesyou.daily.features.tasks.ui
+package com.nesyou.daily.features.task.ui
 
 import android.text.format.DateFormat
 import androidx.compose.foundation.ExperimentalFoundationApi
@@ -24,6 +24,7 @@ import com.nesyou.daily.core.ui.components.Calendar
 import com.nesyou.daily.core.ui.components.SearchInput
 import com.nesyou.daily.core.ui.components.DateHeader
 import com.nesyou.daily.core.ui.components.TaskCard
+import com.nesyou.daily.features.task.ui.tasks.TasksViewModel
 import java.util.*
 import kotlin.collections.HashMap
 
@@ -102,7 +103,7 @@ fun TasksScreen(viewModel: TasksViewModel = hiltViewModel()) {
                 Row(
                     modifier = Modifier
                         .fillParentMaxWidth()
-                        .padding(horizontal = horizontalPadding, vertical = 10.dp),
+                        .padding(horizontal = horizontalPadding, vertical = 15.dp),
                     horizontalArrangement = Arrangement.SpaceBetween,
                     verticalAlignment = Alignment.CenterVertically
                 ) {

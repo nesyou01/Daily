@@ -26,6 +26,7 @@ fun MainDialog(
     title: String = "Error",
     text: String?,
     onDismissRequest: () -> Unit,
+    onSuccess: () -> Unit = {},
     status: DialogStatus = DialogStatus.FAIL
 ) {
 
@@ -86,12 +87,27 @@ fun MainDialog(
                         color = Color.White
                     )
                 }
-                IconButton(onClick = onDismissRequest, modifier = Modifier.align(Alignment.Top)) {
-                    Icon(
-                        painter = painterResource(id = R.drawable.ic_round_close_24),
-                        contentDescription = "Close",
-                        tint = Color.White
-                    )
+                Column(
+                    verticalArrangement = Arrangement.SpaceBetween
+                ) {
+                    IconButton(onClick = onDismissRequest) {
+                        Icon(
+                            painter = painterResource(id = R.drawable.ic_round_close_24),
+                            contentDescription = "Close",
+                            tint = Color.White
+                        )
+                    }
+                    if (status != DialogStatus.FAIL) {
+                        IconButton(onClick = onSuccess) {
+                            Icon(
+                                painter = painterResource(id = R.drawable.ic_round_check_24),
+                                contentDescription = "Check",
+                                tint = Color.White
+                            )
+                        }
+                    } else {
+                        Text("")
+                    }
                 }
             }
         }

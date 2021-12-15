@@ -14,6 +14,7 @@ import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
+import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.res.painterResource
@@ -36,13 +37,15 @@ import com.nesyou.daily.features.auth.ui.splash.SplashScreen
 import com.nesyou.daily.features.graphic.ui.GraphicScreen
 import com.nesyou.daily.features.home.ui.HomeScreen
 import com.nesyou.daily.features.profile.ui.ProfileScreen
-import com.nesyou.daily.features.tasks.ui.TasksScreen
+import com.nesyou.daily.features.task.ui.TasksScreen
+import com.nesyou.daily.features.task.ui.add_task.AddTaskScreen
 import dagger.hilt.android.AndroidEntryPoint
 
 
 @AndroidEntryPoint
 @ExperimentalAnimationApi
 @ExperimentalFoundationApi
+@ExperimentalComposeUiApi
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -65,6 +68,7 @@ class MainActivity : ComponentActivity() {
 }
 
 
+@ExperimentalComposeUiApi
 @ExperimentalFoundationApi
 @ExperimentalAnimationApi
 @Composable
@@ -72,7 +76,7 @@ private fun Navigation(navController: NavHostController) {
     val initRoute = if (Firebase.auth.currentUser == null) {
         Screen.Splash.route
     } else {
-        Screen.Tasks.route
+        Screen.Home.route
     }
     NavHost(navController = navController, startDestination = initRoute) {
         composable(Screen.Login.route) {
@@ -95,6 +99,9 @@ private fun Navigation(navController: NavHostController) {
         }
         composable(Screen.Profile.route) {
             ProfileScreen()
+        }
+        composable(Screen.AddTask.route) {
+            AddTaskScreen(navController)
         }
     }
 }
@@ -126,7 +133,11 @@ private fun BottomBar(navController: NavController) {
 
     val currentRoute =
         navController.currentBackStackEntryAsState().value?.destination?.route
-    if (currentRoute in bottomBarItems.map { it.route }) {
+    AnimatedVisibility(
+        currentRoute in bottomBarItems.map { it.route },
+        enter = fadeIn(),
+        exit = fadeOut()
+    ) {
         BottomNavigation(
             backgroundColor = MaterialTheme.colors.background,
             modifier = Modifier.height(65.dp),
@@ -171,11 +182,15 @@ private fun BottomBar(navController: NavController) {
                 )
                 if (i + 1 == bottomBarItems.size / 2) {
                     FloatingActionButton(
-                        onClick = { /*TODO*/ },
+                        onClick = {
+                            navController.navigate(Screen.AddTask.route)
+                        },
                         shape = CircleShape,
                         backgroundColor = MaterialTheme.colors.primary,
                         elevation = FloatingActionButtonDefaults.elevation(0.dp, 0.dp),
-                        modifier = Modifier.padding(horizontal = 10.dp).align(Alignment.CenterVertically),
+                        modifier = Modifier
+                            .padding(horizontal = 10.dp)
+                            .align(Alignment.CenterVertically),
                     ) {
                         Icon(
                             painter = painterResource(id = R.drawable.ic_add),

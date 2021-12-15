@@ -123,7 +123,7 @@ fun HomeScreen() {
 private fun TasksGrid() {
     Row(
         modifier = Modifier
-            .height(360.dp)
+            .height(380.dp)
             .fillMaxWidth(),
         horizontalArrangement = Arrangement.spacedBy(20.dp)
     ) {
@@ -134,7 +134,7 @@ private fun TasksGrid() {
             verticalArrangement = Arrangement.spacedBy(20.dp)
         ) {
             StaggeredItem(
-                weight = 0.55F,
+                weight = 0.6F,
                 colors = listOf(
                     Color(0xFF7DC8E7).copy(alpha = 0.69F),
                     Color(0xFF7DC8E7),

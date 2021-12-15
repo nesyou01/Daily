@@ -1,4 +1,4 @@
-package com.nesyou.daily.features.tasks.ui
+package com.nesyou.daily.features.task.ui.tasks
 
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf

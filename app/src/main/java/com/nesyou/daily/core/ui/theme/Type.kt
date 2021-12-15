@@ -44,5 +44,9 @@ val Typography = Typography(
     h3 = TextStyle(
         fontSize = 20.sp,
         fontWeight = FontWeight.Medium,
-    )
+    ),
+    subtitle1 = TextStyle(
+        fontWeight = FontWeight.SemiBold,
+        fontSize = 18.sp,
+    ),
 )

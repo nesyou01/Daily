@@ -47,4 +47,21 @@ object Helpers {
             }
         }
     }
+
+    fun <T> MutableList<T>.addOrRemove(item: T) {
+        if (any { it == item }) {
+            remove(item)
+        } else {
+            add(item)
+        }
+    }
+
+    fun Calendar.toTimeStamp(): Timestamp = Timestamp(this.timeInMillis)
+
+
+    fun NavController.refresh() {
+        val r = currentBackStackEntry?.destination?.route!!
+        popBackStack()
+        navigate(r)
+    }
 }

@@ -26,4 +26,18 @@
     <string name="tomorrow">Tomorrow</string>
     <string name="cancel">Cancel</string>
     <string name="save">Save</string>
+    <string name="add_task">Add Task</string>
+    <string name="title">Title</string>
+    <string name="edit_time">Edit Time</string>
+    <string name="time">Time</string>
+    <string name="type">Type</string>
+    <string name="create">Create</string>
+    <string name="office">Office</string>
+    <string name="tags">Tags</string>
+    <string name="date">Date</string>
+    <string name="finish_time">Finish time</string>
+    <string name="description">Description</string>
+    <string name="the_task_successfully">The task has been added successfully</string>
+    <string name="success">Success</string>
+    <string name="task_at_past">You can\'t save task at the past.</string>
 </resources>

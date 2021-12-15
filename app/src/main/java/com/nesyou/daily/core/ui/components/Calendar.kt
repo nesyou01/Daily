@@ -168,6 +168,7 @@ fun Calendar(date: Calendar, onDismissRequested: () -> Unit = {}, onSave: (Calen
                     cancel = onDismissRequested,
                     save = {
                         onSave(selectedTime)
+                        onDismissRequested()
                     }
                 )
             }

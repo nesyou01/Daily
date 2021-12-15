@@ -15,7 +15,7 @@ data class Resource<out T>(
     val error: Exception? = null
 ) {
     companion object {
-        fun <T> success(data: T): Resource<T> =
+        fun <T> success(data: T? = null): Resource<T> =
             Resource(status = Status.SUCCESS, data = data, error = null)
 
         fun <T> error(exception: Exception): Resource<T> =
